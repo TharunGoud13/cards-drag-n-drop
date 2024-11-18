@@ -1,9 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  compiler:{
-    removeConsole: true
-  }
+  // compiler:{
+  //   removeConsole: true
+  // }
   /* config options here */
 };
 

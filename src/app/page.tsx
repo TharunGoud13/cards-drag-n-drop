@@ -12,9 +12,12 @@ export default function HomePage() {
     "horizontal"
   );
 
+  console.log("direction", direction);
+
   useEffect(() => {
     const updateDirection = () => {
       if (window.innerWidth < 768) {
+        setDirection("vertical")
       } else {
         setDirection("horizontal");
       }
@@ -76,13 +79,13 @@ export default function HomePage() {
             value={inputValue}
             onKeyPress={handleKeyPress}
             onChange={(e) => setInputValue(e.target.value)}
-            className="p-2.5 border-2 md:w-[25vw] rounded-sm"
+            className="p-2.5 border-2 w-[90vw] md:w-[25vw] rounded-sm"
             placeholder="Enter text"
           />
           <button
             type="button"
             onClick={handleAdd}
-            className="bg-primary hover:scale-105 transition hover:animate-pulse ease-in-out duration-300 h-fit w-[80px] text-white p-2.5 rounded-lg"
+            className="bg-primary md:block hidden hover:scale-105 transition hover:animate-pulse ease-in-out duration-300 h-fit w-[80px] text-white p-2.5 rounded-lg"
           >
             Add
           </button>
