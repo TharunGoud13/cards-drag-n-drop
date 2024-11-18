@@ -8,25 +8,23 @@ type Index = number | string;
 export default function HomePage() {
   const [inputValue, setInputValue] = useState("");
   const [cards, setCards] = useState<string[]>([]);
-  const [direction, setDirection] = useState<"horizontal" | "vertical">("horizontal");
+  const [direction, setDirection] = useState<"horizontal" | "vertical">(
+    "horizontal"
+  );
 
   useEffect(() => {
-    // Update the direction based on screen size
     const updateDirection = () => {
       if (window.innerWidth < 768) {
-        setDirection("vertical"); // Mobile: vertical
       } else {
-        setDirection("horizontal"); // Tablet/Desktop: horizontal
+        setDirection("horizontal");
       }
     };
 
-    // Add event listener for window resize
     window.addEventListener("resize", updateDirection);
 
     // Initial check
     updateDirection();
 
-    // Cleanup event listener on unmount
     return () => window.removeEventListener("resize", updateDirection);
   }, []);
 
@@ -48,27 +46,27 @@ export default function HomePage() {
 
   useEffect(() => {
     const existingCards: any = localStorage.getItem("cards");
-    setCards(JSON.parse(existingCards));
-    console.log(existingCards);
+    if (existingCards) {
+      setCards(JSON.parse(existingCards));
+      console.log(existingCards);
+    }
   }, []);
 
   const handleRemove = (index: Index) => {
     const remainingCards = cards.filter((_, i) => i !== index);
-    console.log("remainn----", remainingCards);
     setCards(remainingCards);
     localStorage.setItem("cards", JSON.stringify(remainingCards));
   };
 
   console.log("cards---", cards);
 
-  const handleDragEnd = (result:any) => {
+  const handleDragEnd = (result: any) => {
     const items = [...cards];
-    const [reorderedItems] = items.splice(result.source.index,1)
-    items.splice(result.destination.index,0,reorderedItems)
+    const [reorderedItems] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItems);
     setCards(items);
     localStorage.setItem("cards", JSON.stringify(items));
-
-  }
+  };
   return (
     <div>
       <div className="flex flex-col items-center ">
